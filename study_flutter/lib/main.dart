@@ -50,10 +50,11 @@ class Home extends StatelessWidget{
             child: Text('data'),
           ),
           bottomNavigationBar: BottomNavigationBar(
+            currentIndex: 1,
             backgroundColor: Colors.white,
             items: [
               BottomNavigationBarItem(
-                  icon: Icon(Icons.access_alarm,color: Colors.white,),
+                  icon: Icon(Icons.access_alarm,color: Colors.grey,),
                   activeIcon: Icon(Icons.access_alarm,color: Colors.blue,),
                   title: Text('闹钟')),
               BottomNavigationBarItem(icon: Icon(Icons.ac_unit),title: Text('白雪')),
