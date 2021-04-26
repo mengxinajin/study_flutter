@@ -1,115 +1,76 @@
 import 'package:flutter/material.dart';
 import 'model/post.dart';
-
+import 'demo/Listviewdemo.dart';
 void main() => runApp(Home());
 class Home extends StatelessWidget{
-  Widget _listItemBuilder(BuildContext context,int index){
-    return Container(
-      color: Colors.black12,
-      margin: EdgeInsets.all(10),
-      child: Column(
-        children: <Widget>[
-          Image.network(posts[index].imgUrl),
-
-          SizedBox(height: 5,),
-
-          Text(
-              posts[index].title,
-              style: Theme.of(context).textTheme.headline6,
-          ),
-          Text(
-            posts[index].author,
-            style: Theme.of(context).textTheme.headline6,
-          )
-        ],
-      ),
-    );
-  }
-
-
   @override
   Widget build(BuildContext context) {
 
     // TODO: implement build
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-
-          title: Text('Hello'),
-          elevation: 23.0,//阴影
-        ),
-        body: ListView.builder(
-          itemCount: posts.length,
-          itemBuilder: _listItemBuilder,
-          ),
-
-      ),
       theme: ThemeData(
-          primaryColor: Colors.blueAccent
+        primarySwatch: Colors.blue,
+        highlightColor: Color.fromRGBO(255, 255, 255, 0.5),
+        splashColor: Colors.white70,
       ),
-    );
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('Hello'),
+            actions: <Widget>[
+              IconButton(icon: Icon(Icons.search),
+                tooltip: "navigation",
+                onPressed: () => debugPrint("search pressed"),
+              ),
+            ],
 
-  }
-}
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false, //隐藏debug条
-      title: '首页',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('首页'),
-        ),
-        body: Center(
-          child: Container(
-            child: Text(''),
+            elevation: 0.0,//阴影
+            bottom: TabBar(
+              unselectedLabelColor: Colors.black38,
+              indicatorColor: Colors.black45,
+              indicatorSize: TabBarIndicatorSize.label,
+                indicatorWeight: 1.0,
+              tabs: <Widget>[
+                Tab(icon: Icon(Icons.local_activity),),
+                Tab(icon: Icon(Icons.change_history),),
+                Tab(icon: Icon(Icons.directions_bike),),
+              ],
+            ),
           ),
+          body: TabBarView(
+            children: <Widget>[
+              Icon(Icons.local_activity,size: 128,color: Colors.black12,),
+              Icon(Icons.change_history,size: 128,color: Colors.black12,),
+              Icon(Icons.directions_bike,size: 128,color: Colors.black12,),
+            ],
+          ),
+          drawer: Drawer(
+            child: Text('data'),
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Colors.white,
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.access_alarm,color: Colors.white,),
+                  activeIcon: Icon(Icons.access_alarm,color: Colors.blue,),
+                  title: Text('闹钟')),
+              BottomNavigationBarItem(icon: Icon(Icons.ac_unit),title: Text('白雪')),
+            ],
+          )
         ),
-      ),
+
+      )
+
     );
+
   }
 }
-class App extends StatelessWidget{
-    @override
-    Widget build(BuildContext context) {
 
-    // TODO: implement build
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
+class MyDrawer extends Drawer{
 
-          title: Text('Hello'),
-          elevation: 0.0,//阴影
-        ),
-        body: Hello(),
 
-    ),
-    theme: ThemeData(
-      primaryColor: Colors.cyan
-    ),
-    );
-
-  }
-}
-
-class Hello extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Center(
-      child: Text('Hello',
-        textDirection: TextDirection.ltr,
-        style: TextStyle(
-            fontSize: 40.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.blue
-        ),
-      ),
-    );
-  }
 }
 
 
